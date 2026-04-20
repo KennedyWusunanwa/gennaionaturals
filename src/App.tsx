@@ -27,6 +27,7 @@ interface Product {
   amazonLink: string;
   isBestSeller?: boolean;
   colorClass: string;
+  imageSrc: string;
 }
 
 const AMAZON_LINKS = {
@@ -39,67 +40,76 @@ const AMAZON_LINKS = {
 const PRODUCTS: Product[] = [
   {
     id: "soursop-bitters",
-    name: "Soursop Bitters",
+    name: "Organic Soursop Bitters (16oz)",
     tagline:
-      "A powerful all-in-one herbal tonic for detox, digestion, and immune support.",
+      "A powerful herbal tonic for daily balance, digestion, and full-body vitality.",
     description:
-      "A powerful herbal blend made from soursop and natural ingredients to support detoxification, digestion, and immune health.",
+      "A powerful herbal tonic formulated with soursop and a blend of natural botanicals to support full-body wellness. Designed for everyday use, this formula helps maintain internal balance, support digestion, and promote overall vitality.",
     benefits: [
-      "Supports detox",
-      "Boosts immunity",
-      "Aids digestion",
-      "Promotes natural energy",
+      "Supports natural detox processes",
+      "Aids healthy digestion",
+      "Helps strengthen immune function",
+      "Rich in plant-based antioxidants",
+      "Promotes daily energy and vitality",
     ],
     amazonLink: AMAZON_LINKS.soursop,
     isBestSeller: true,
     colorClass: "from-green-100 to-green-200",
+    imageSrc: "/img/Soursop.png",
   },
   {
     id: "blackseed-soursop",
-    name: "Blackseed + Soursop Bitters",
+    name: "Organic Blackseed Bitters (16oz)",
     tagline:
-      "A stronger formula combining two powerful herbs for deeper wellness support.",
+      "A potent black seed formula for cleansing, balance, and total system support.",
     description:
-      "A dual-action formula combining black seed and soursop for deeper internal cleansing and immune support.",
+      "A potent herbal formula built around black seed, known for its long-standing use in traditional wellness practices. This blend is designed to support internal cleansing, metabolic balance, and overall system health.",
     benefits: [
-      "Strong immune support",
-      "Anti-inflammatory properties",
-      "Gut health support",
-      "Enhanced detox",
+      "Supports immune system function",
+      "Helps reduce internal inflammation",
+      "Promotes liver and digestive health",
+      "Aids natural detoxification",
+      "Supports overall body balance",
     ],
     amazonLink: AMAZON_LINKS.blackseedSoursop,
     colorClass: "from-stone-200 to-stone-300",
+    imageSrc: "/img/blackseed.png",
   },
   {
     id: "advanced-herbal",
-    name: "Advanced Herbal Bitters",
+    name: "Organic Seamoss Bitters (16oz)",
     tagline:
-      "A balanced herbal blend designed to cleanse and restore your system.",
+      "A mineral-rich tonic to support energy, digestion, and everyday wellness.",
     description:
-      "A carefully crafted blend of herbs designed to cleanse the body and restore balance.",
+      "A mineral-rich herbal tonic powered by seamoss, combined with complementary botanicals to support essential body functions. Ideal for maintaining energy, digestion, and overall wellness.",
     benefits: [
-      "Supports internal cleansing",
-      "Promotes digestion",
-      "Maintains body balance",
+      "Supports thyroid and metabolic function",
+      "Promotes digestive health",
+      "Provides essential minerals and nutrients",
+      "Supports immune system strength",
+      "Enhances overall vitality",
     ],
     amazonLink: AMAZON_LINKS.advanced,
     colorClass: "from-amber-100 to-amber-200",
+    imageSrc: "/img/seamoss.png",
   },
   {
     id: "wellness-bundle",
-    name: "Immune, Digestive & Antioxidant Pack",
+    name: "Immune, Digestive & Antioxidant Pack (3-Pack)",
     tagline:
-      "The complete wellness bundle featuring Blackseed, Soursop, and Sea Moss bitters.",
+      "A complete wellness system with Blackseed, Soursop, and Seamoss bitters.",
     description:
-      "A complete wellness bundle featuring Blackseed, Soursop, and Sea Moss bitters for total body support.",
+      "A complete wellness system combining three powerful herbal formulas - Blackseed, Soursop, and Seamoss bitters. Designed for those who want consistent, full-spectrum support across multiple areas of health.",
     benefits: [
-      "Full-spectrum immune support",
-      "Digestive health support",
-      "Rich antioxidant content",
-      "Best value for long-term use",
+      "Comprehensive immune system support",
+      "Supports digestion and gut health",
+      "High antioxidant content",
+      "Promotes natural detox and balance",
+      "Best value for long-term wellness routines",
     ],
     amazonLink: AMAZON_LINKS.bundle,
     colorClass: "from-emerald-100 to-teal-200",
+    imageSrc: "/img/Immune, Digestive & Antioxidant Pack.png",
   },
 ];
 
@@ -289,18 +299,17 @@ const Navbar = ({
           : "bg-white/95 py-5 backdrop-blur-md"
       }`}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-4">
           <div
-            className="group flex cursor-pointer items-center gap-2"
+            className="group flex min-w-0 flex-1 cursor-pointer items-center"
             onClick={() => setRoute("home")}
           >
-            <div className="rounded-lg bg-green-900 p-2 text-white transition-colors group-hover:bg-green-800">
-              <Leaf size={24} />
-            </div>
-            <span className="font-serif text-xl font-bold tracking-tight text-stone-900">
-              GENNAIO NATURALS
-            </span>
+            <img
+              src="/img/green logo.png"
+              alt="Gennaio Naturals"
+              className="h-9 w-auto max-w-[220px] object-contain transition-transform group-hover:scale-[1.02] sm:h-10 md:h-11"
+            />
           </div>
 
           <nav className="hidden items-center gap-8 md:flex">
@@ -380,13 +389,12 @@ const Footer = ({ setRoute }: { setRoute: (r: Route) => void }) => (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
         <div className="col-span-1 md:col-span-2">
-          <div className="mb-6 flex items-center gap-2">
-            <div className="rounded-lg bg-stone-800 p-2 text-green-400">
-              <Leaf size={24} />
-            </div>
-            <span className="font-serif text-2xl font-bold tracking-tight text-white">
-              GENNAIO NATURALS
-            </span>
+          <div className="mb-6">
+            <img
+              src="/img/white logo.png"
+              alt="Gennaio Naturals"
+              className="w-full max-w-[320px] object-contain drop-shadow-[0_0_24px_rgba(255,255,255,0.18)] sm:max-w-[380px]"
+            />
           </div>
           <p className="max-w-sm leading-relaxed text-stone-400">
             Premium herbal blends crafted from authentic African ingredients to
@@ -441,7 +449,18 @@ const Footer = ({ setRoute }: { setRoute: (r: Route) => void }) => (
   </footer>
 );
 
-const HomeView = ({ setRoute }: { setRoute: (r: Route) => void }) => {
+const HomeView = ({
+  setRoute,
+  setActiveProductId,
+}: {
+  setRoute: (r: Route) => void;
+  setActiveProductId: (productId: string | null) => void;
+}) => {
+  const openProduct = (productId: string) => {
+    setActiveProductId(productId);
+    setRoute("products");
+  };
+
   return (
     <div className="w-full overflow-hidden">
       <section className="relative overflow-hidden bg-stone-50 pb-32 pt-20 lg:pb-40 lg:pt-32">
@@ -452,6 +471,28 @@ const HomeView = ({ setRoute }: { setRoute: (r: Route) => void }) => {
             className="h-full w-full object-cover opacity-10"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-stone-50/80 to-stone-50" />
+        </div>
+        <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+          <img
+            src="/img/Soursop.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute -left-16 top-8 w-48 rotate-[-12deg] opacity-20 blur-[1px] sm:w-56 lg:left-4 lg:top-14 lg:w-72"
+          />
+          <img
+            src="/img/blackseed.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute -right-16 top-20 w-44 rotate-[16deg] opacity-15 blur-[1px] sm:w-52 lg:right-6 lg:top-16 lg:w-64"
+          />
+          <img
+            src="/img/seamoss.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute bottom-2 left-1/2 hidden w-56 -translate-x-1/2 opacity-10 md:block lg:w-72"
+          />
+          <div className="absolute left-10 top-20 h-28 w-28 rounded-full bg-green-200/35 blur-3xl sm:h-40 sm:w-40" />
+          <div className="absolute bottom-10 right-10 h-32 w-32 rounded-full bg-amber-200/40 blur-3xl sm:h-44 sm:w-44" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -489,7 +530,10 @@ const HomeView = ({ setRoute }: { setRoute: (r: Route) => void }) => {
                   Shop on Amazon
                 </Button>
                 <Button
-                  onClick={() => setRoute("products")}
+                  onClick={() => {
+                    setActiveProductId(null);
+                    setRoute("products");
+                  }}
                   variant="outline"
                   className="w-full px-8 text-lg sm:w-auto"
                 >
@@ -542,7 +586,19 @@ const HomeView = ({ setRoute }: { setRoute: (r: Route) => void }) => {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {PRODUCTS.map((product, i) => (
               <RevealOnScroll key={product.id} delay={i * 100}>
-                <div className="group relative flex h-full flex-col rounded-2xl border border-stone-100 bg-stone-50 p-6 transition-all duration-300 hover:border-green-200 hover:shadow-xl">
+                <div
+                  className="group relative flex h-full cursor-pointer flex-col rounded-2xl border border-stone-100 bg-stone-50 p-6 transition-all duration-300 hover:border-green-200 hover:shadow-xl"
+                  onClick={() => openProduct(product.id)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      openProduct(product.id);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${product.name} details`}
+                >
                   {product.isBestSeller && (
                     <div className="absolute -right-3 -top-3 z-10 flex items-center gap-1 rounded-full bg-amber-400 px-3 py-1 text-xs font-bold text-stone-900 shadow-sm">
                       <Star size={12} className="fill-stone-900" /> Best Seller
@@ -551,15 +607,12 @@ const HomeView = ({ setRoute }: { setRoute: (r: Route) => void }) => {
                   <div
                     className={`relative mb-6 flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br ${product.colorClass} transition-transform duration-500 group-hover:scale-[1.02]`}
                   >
-                    <div className="relative flex h-2/3 w-1/2 flex-col items-center justify-center rounded-lg bg-stone-900 p-4 shadow-2xl">
-                      <div className="absolute -top-4 h-6 w-1/3 rounded-t-sm bg-stone-800" />
-                      <div className="flex h-full w-full flex-col items-center justify-center rounded bg-white p-2 text-center shadow-inner">
-                        <Leaf className="mb-2 text-green-900" size={20} />
-                        <span className="text-[10px] font-bold leading-tight text-stone-900">
-                          {product.name}
-                        </span>
-                      </div>
-                    </div>
+                    <div className="absolute inset-x-6 bottom-0 top-6 rounded-[2rem] bg-white/35 blur-2xl" />
+                    <img
+                      src={product.imageSrc}
+                      alt={product.name}
+                      className="relative z-10 h-full w-full object-contain p-4 sm:p-6"
+                    />
                   </div>
                   <h3 className="mb-2 text-xl font-bold text-stone-900">
                     {product.name}
@@ -567,14 +620,16 @@ const HomeView = ({ setRoute }: { setRoute: (r: Route) => void }) => {
                   <p className="mb-6 flex-grow text-sm text-stone-600">
                     {product.tagline}
                   </p>
-                  <Button
-                    href={product.amazonLink}
-                    external
-                    variant="amazon"
-                    className="w-full text-sm font-semibold"
-                  >
-                    Buy on Amazon <ArrowRight size={16} className="ml-2" />
-                  </Button>
+                  <div onClick={(event) => event.stopPropagation()}>
+                    <Button
+                      href={product.amazonLink}
+                      external
+                      variant="amazon"
+                      className="w-full text-sm font-semibold"
+                    >
+                      Buy on Amazon <ArrowRight size={16} className="ml-2" />
+                    </Button>
+                  </div>
                 </div>
               </RevealOnScroll>
             ))}
@@ -678,7 +733,27 @@ const HomeView = ({ setRoute }: { setRoute: (r: Route) => void }) => {
   );
 };
 
-const ProductsView = () => {
+const ProductsView = ({
+  activeProductId,
+  clearActiveProductId,
+}: {
+  activeProductId: string | null;
+  clearActiveProductId: () => void;
+}) => {
+  const productRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  useEffect(() => {
+    if (!activeProductId) {
+      return;
+    }
+
+    const target = productRefs.current[activeProductId];
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      clearActiveProductId();
+    }
+  }, [activeProductId, clearActiveProductId]);
+
   return (
     <div className="w-full bg-white pb-24">
       <div className="border-b border-stone-200 bg-stone-50 py-20">
@@ -697,81 +772,74 @@ const ProductsView = () => {
 
       <div className="mx-auto max-w-7xl space-y-24 px-4 py-16 sm:px-6 lg:px-8">
         {PRODUCTS.map((product, index) => (
-          <RevealOnScroll
+          <div
             key={product.id}
-            className="grid items-center gap-12 md:grid-cols-2"
+            id={product.id}
+            ref={(element) => {
+              productRefs.current[product.id] = element;
+            }}
+            className="scroll-mt-28"
           >
-            <div className={`order-1 ${index % 2 === 1 ? "md:order-2" : ""}`}>
-              <div
-                className={`group relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br ${product.colorClass} p-12 shadow-inner`}
-              >
-                <Leaf className="absolute -bottom-12 -right-12 h-64 w-64 rotate-45 text-white/20 transition-transform duration-700 group-hover:rotate-12" />
-                <div className="z-10 flex h-4/5 w-2/3 transform flex-col items-center justify-center rounded-2xl border border-stone-800 bg-[#2A2A2A] shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                  <div className="absolute -top-6 h-8 w-1/3 rounded-t-md bg-black shadow-md" />
-                  <div className="absolute -top-7 h-2 w-1/4 rounded-t-sm bg-stone-800" />
-                  <div className="relative flex h-[75%] w-[85%] flex-col items-center justify-between overflow-hidden rounded bg-[#FDFBF7] p-4 text-center shadow-md">
-                    <div className="absolute left-0 top-0 h-2 w-full bg-green-900" />
-                    <div className="mt-4 flex flex-col items-center">
-                      <Leaf className="mb-2 text-green-900" size={24} />
-                      <span className="font-serif text-lg font-bold leading-tight text-stone-900">
-                        {product.name}
-                      </span>
-                      <span className="mt-2 text-[10px] uppercase tracking-widest text-stone-500">
-                        Herbal Supplement
-                      </span>
-                    </div>
-                    <div className="w-full border-t border-stone-200 pt-2 text-[8px] text-stone-400">
-                      Made with authentic ingredients
-                    </div>
+            <RevealOnScroll className="grid items-center gap-12 md:grid-cols-2">
+              <div className={`order-1 ${index % 2 === 1 ? "md:order-2" : ""}`}>
+                <div
+                  className={`group relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br ${product.colorClass} p-6 shadow-inner sm:p-8 md:p-12`}
+                >
+                  <Leaf className="absolute -bottom-12 -right-12 h-64 w-64 rotate-45 text-white/20 transition-transform duration-700 group-hover:rotate-12" />
+                  <div className="absolute inset-x-8 bottom-4 top-8 rounded-[2.5rem] bg-white/35 blur-3xl" />
+                  <img
+                    src={product.imageSrc}
+                    alt={product.name}
+                    className="relative z-10 max-h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              </div>
+
+              <div className={`order-2 ${index % 2 === 1 ? "md:order-1" : ""}`}>
+                {product.isBestSeller && (
+                  <div className="mb-4 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
+                    Best Seller
                   </div>
+                )}
+                <h2 className="mb-4 font-serif text-4xl font-bold text-stone-900">
+                  {product.name}
+                </h2>
+                <p className="mb-8 text-lg leading-relaxed text-stone-600">
+                  {product.description}
+                </p>
+
+                <div className="mb-8">
+                  <h4 className="mb-4 border-b border-stone-200 pb-2 text-sm font-bold uppercase tracking-wider text-stone-900">
+                    Key Benefits
+                  </h4>
+                  <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {product.benefits.map((benefit) => (
+                      <li
+                        key={benefit}
+                        className="flex items-start gap-2 text-stone-700"
+                      >
+                        <CheckCircle
+                          className="mt-0.5 shrink-0 text-green-600"
+                          size={18}
+                        />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+
+                <Button
+                  href={product.amazonLink}
+                  external
+                  variant="amazon"
+                  className="w-full px-8 sm:w-auto"
+                >
+                  <ShoppingBag className="mr-2" size={20} />
+                  Buy on Amazon
+                </Button>
               </div>
-            </div>
-
-            <div className={`order-2 ${index % 2 === 1 ? "md:order-1" : ""}`}>
-              {product.isBestSeller && (
-                <div className="mb-4 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
-                  Best Seller
-                </div>
-              )}
-              <h2 className="mb-4 font-serif text-4xl font-bold text-stone-900">
-                {product.name}
-              </h2>
-              <p className="mb-8 text-lg leading-relaxed text-stone-600">
-                {product.description}
-              </p>
-
-              <div className="mb-8">
-                <h4 className="mb-4 border-b border-stone-200 pb-2 text-sm font-bold uppercase tracking-wider text-stone-900">
-                  Key Benefits
-                </h4>
-                <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  {product.benefits.map((benefit) => (
-                    <li
-                      key={benefit}
-                      className="flex items-start gap-2 text-stone-700"
-                    >
-                      <CheckCircle
-                        className="mt-0.5 shrink-0 text-green-600"
-                        size={18}
-                      />
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Button
-                href={product.amazonLink}
-                external
-                variant="amazon"
-                className="w-full px-8 sm:w-auto"
-              >
-                <ShoppingBag className="mr-2" size={20} />
-                Buy on Amazon
-              </Button>
-            </div>
-          </RevealOnScroll>
+            </RevealOnScroll>
+          </div>
         ))}
       </div>
 
@@ -1032,6 +1100,7 @@ const ContactView = () => {
 
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState<Route>("home");
+  const [activeProductId, setActiveProductId] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1040,9 +1109,19 @@ export default function App() {
   const renderView = () => {
     switch (currentRoute) {
       case "home":
-        return <HomeView setRoute={setCurrentRoute} />;
+        return (
+          <HomeView
+            setRoute={setCurrentRoute}
+            setActiveProductId={setActiveProductId}
+          />
+        );
       case "products":
-        return <ProductsView />;
+        return (
+          <ProductsView
+            activeProductId={activeProductId}
+            clearActiveProductId={() => setActiveProductId(null)}
+          />
+        );
       case "about":
         return <AboutView />;
       case "impact":
@@ -1050,7 +1129,12 @@ export default function App() {
       case "contact":
         return <ContactView />;
       default:
-        return <HomeView setRoute={setCurrentRoute} />;
+        return (
+          <HomeView
+            setRoute={setCurrentRoute}
+            setActiveProductId={setActiveProductId}
+          />
+        );
     }
   };
 
