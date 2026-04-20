@@ -148,7 +148,7 @@ const CEO_DETAILS = {
   company: "Gennaio Naturals",
   companyRole: "Self-employed",
   phone: "+1 (443) 839-3030",
-  email: "ezekofi@gmail.com",
+  email: "info@gennaionaturals.com",
   linkedin: "https://www.linkedin.com/in/ezekiel-gyimah-1aa19210/",
 };
 
