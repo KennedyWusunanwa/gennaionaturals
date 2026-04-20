@@ -12,7 +12,17 @@
     min-width: 320px;
     background: #f7f5f2;
     color: #1c1917;
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    font-family:
+      "Plus Jakarta Sans",
+      "Inter",
+      "Segoe UI",
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   * {

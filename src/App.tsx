@@ -429,31 +429,39 @@ const Navbar = ({
 };
 
 const Footer = ({ setRoute }: { setRoute: (r: Route) => void }) => (
-  <footer className="bg-stone-950 py-16 text-stone-300">
+  <footer className="bg-stone-950 py-14 text-stone-300 sm:py-16">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
-        <div className="col-span-1 md:col-span-2">
-          <div className="mb-6">
-            <img
-              src="/img/white logo.png"
-              alt="Gennaio Naturals"
-              className="w-full max-w-[320px] object-contain drop-shadow-[0_0_24px_rgba(255,255,255,0.18)] sm:max-w-[380px]"
-            />
-          </div>
-          <p className="max-w-sm leading-relaxed text-stone-400">
+      <div className="grid gap-10 rounded-[2rem] border border-stone-800 bg-stone-950/80 p-6 sm:p-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.7fr)_minmax(0,0.9fr)] lg:gap-12">
+        <div className="min-w-0">
+          <img
+            src="/img/white logo.png"
+            alt="Gennaio Naturals"
+            className="w-full max-w-[260px] object-contain sm:max-w-[300px]"
+          />
+          <p className="mt-5 max-w-md text-sm leading-7 text-stone-400 sm:text-base">
             Premium herbal blends crafted from authentic African ingredients to
             support your body naturally.
           </p>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="rounded-full border border-green-900/70 bg-green-950/50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-green-300">
+              Natural Wellness
+            </span>
+            <span className="rounded-full border border-stone-700 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-stone-300">
+              Amazon Fulfilled
+            </span>
+          </div>
         </div>
 
-        <div>
-          <h4 className="mb-6 font-semibold text-white">Explore</h4>
-          <ul className="space-y-4">
+        <div className="min-w-0">
+          <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-white">
+            Explore
+          </h4>
+          <ul className="space-y-3">
             {NAV_LINKS.map((link) => (
               <li key={link.route}>
                 <button
                   onClick={() => setRoute(link.route)}
-                  className="transition-colors hover:text-green-400"
+                  className="text-sm text-stone-400 transition-colors hover:text-green-400 sm:text-[15px]"
                 >
                   {link.label}
                 </button>
@@ -462,9 +470,11 @@ const Footer = ({ setRoute }: { setRoute: (r: Route) => void }) => (
           </ul>
         </div>
 
-        <div>
-          <h4 className="mb-6 font-semibold text-white">Connect</h4>
-          <ul className="space-y-4">
+        <div className="min-w-0">
+          <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-white">
+            Connect
+          </h4>
+          <ul className="space-y-3">
             {SOCIAL_LINKS.map((social) => {
               const Icon = social.icon;
 
@@ -474,9 +484,12 @@ const Footer = ({ setRoute }: { setRoute: (r: Route) => void }) => (
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 transition-colors hover:text-green-400"
+                    className="flex items-center gap-3 text-sm text-stone-400 transition-colors hover:text-green-400 sm:text-[15px]"
                   >
-                    <Icon size={18} /> {social.handle}
+                    <span className="rounded-full border border-stone-700 p-2 text-stone-300">
+                      <Icon size={16} />
+                    </span>
+                    <span>{social.handle}</span>
                   </a>
                 </li>
               );
@@ -485,9 +498,9 @@ const Footer = ({ setRoute }: { setRoute: (r: Route) => void }) => (
         </div>
       </div>
 
-      <div className="mt-16 flex flex-col items-center justify-between border-t border-stone-800 pt-8 text-sm text-stone-500 md:flex-row">
+      <div className="mt-8 flex flex-col gap-2 border-t border-stone-800 pt-6 text-center text-sm text-stone-500 sm:flex-row sm:items-center sm:justify-between sm:text-left">
         <p>(c) {new Date().getFullYear()} Gennaio Naturals. All Rights Reserved.</p>
-        <p className="mt-2 md:mt-0">Natural Wellness That Works</p>
+        <p>Natural Wellness That Works</p>
       </div>
     </div>
   </footer>
