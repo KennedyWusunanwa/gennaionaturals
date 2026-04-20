@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import QRCode from "qrcode";
 import {
   ArrowRight,
   CheckCircle,
@@ -16,7 +17,13 @@ import {
   Youtube,
 } from "lucide-react";
 
-type Route = "home" | "products" | "about" | "impact" | "contact";
+type Route =
+  | "home"
+  | "products"
+  | "about"
+  | "impact"
+  | "contact"
+  | "ceo-card";
 
 interface Product {
   id: string;
@@ -120,6 +127,43 @@ const NAV_LINKS: { label: string; route: Route }[] = [
   { label: "Impact", route: "impact" },
   { label: "Contact", route: "contact" },
 ];
+
+const VALID_ROUTES: Route[] = [
+  "home",
+  "products",
+  "about",
+  "impact",
+  "contact",
+  "ceo-card",
+];
+
+const getRouteFromHash = (): Route => {
+  const route = window.location.hash.replace("#", "") as Route;
+  return VALID_ROUTES.includes(route) ? route : "home";
+};
+
+const CEO_DETAILS = {
+  name: "Ezekiel Gyimah",
+  title: "Partner",
+  company: "Gennaio Naturals",
+  companyRole: "Self-employed",
+  phone: "+1 (443) 839-3030",
+  email: "ezekofi@gmail.com",
+  linkedin: "https://www.linkedin.com/in/ezekiel-gyimah-1aa19210/",
+};
+
+const CEO_QR_CONTENT = [
+  "BEGIN:VCARD",
+  "VERSION:3.0",
+  `FN:${CEO_DETAILS.name}`,
+  `ORG:${CEO_DETAILS.company}`,
+  `TITLE:${CEO_DETAILS.title}`,
+  `TEL;TYPE=CELL:${CEO_DETAILS.phone}`,
+  `EMAIL:${CEO_DETAILS.email}`,
+  `URL:${CEO_DETAILS.linkedin}`,
+  "NOTE:Partner at Gennaio Naturals",
+  "END:VCARD",
+].join("\n");
 
 const SOCIAL_LINKS = [
   {
@@ -857,6 +901,136 @@ const ProductsView = ({
   );
 };
 
+const CeoCardView = () => {
+  const [qrDataUrl, setQrDataUrl] = useState("");
+
+  useEffect(() => {
+    let isMounted = true;
+
+    QRCode.toDataURL(CEO_QR_CONTENT, {
+      width: 320,
+      margin: 2,
+      color: {
+        dark: "#123524",
+        light: "#F7F5F2",
+      },
+    }).then((url: string) => {
+      if (isMounted) {
+        setQrDataUrl(url);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return (
+    <div className="bg-stone-50 py-16 sm:py-24">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="overflow-hidden rounded-[2rem] border border-green-100 bg-white shadow-2xl">
+          <div className="bg-gradient-to-r from-green-950 via-green-900 to-stone-900 px-6 py-10 text-white sm:px-10">
+            <img
+              src="/img/green logo.png"
+              alt="Gennaio Naturals"
+              className="h-10 w-auto object-contain brightness-[1.9] contrast-[0.9] sm:h-12"
+            />
+            <div className="mt-8">
+              <p className="text-sm uppercase tracking-[0.3em] text-green-200">
+                Executive Contact
+              </p>
+              <h1 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">
+                {CEO_DETAILS.name}
+              </h1>
+              <p className="mt-3 text-lg text-green-100">
+                {CEO_DETAILS.title}
+              </p>
+              <p className="text-green-200">
+                {CEO_DETAILS.company} | {CEO_DETAILS.companyRole}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-10 px-6 py-8 sm:px-10 sm:py-10 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="space-y-6">
+              <div className="rounded-2xl bg-stone-50 p-5">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">
+                  Contact Details
+                </p>
+                <div className="mt-5 space-y-4">
+                  <a
+                    href={`tel:${CEO_DETAILS.phone.replace(/[^+\d]/g, "")}`}
+                    className="block rounded-xl border border-stone-200 bg-white px-4 py-4 transition-colors hover:border-green-200 hover:text-green-900"
+                  >
+                    <span className="block text-sm text-stone-500">Phone</span>
+                    <span className="text-lg font-semibold">
+                      {CEO_DETAILS.phone}
+                    </span>
+                  </a>
+                  <a
+                    href={`mailto:${CEO_DETAILS.email}`}
+                    className="block rounded-xl border border-stone-200 bg-white px-4 py-4 transition-colors hover:border-green-200 hover:text-green-900"
+                  >
+                    <span className="block text-sm text-stone-500">Email</span>
+                    <span className="text-lg font-semibold">
+                      {CEO_DETAILS.email}
+                    </span>
+                  </a>
+                  <a
+                    href={CEO_DETAILS.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded-xl border border-stone-200 bg-white px-4 py-4 transition-colors hover:border-green-200 hover:text-green-900"
+                  >
+                    <span className="block text-sm text-stone-500">
+                      LinkedIn
+                    </span>
+                    <span className="text-lg font-semibold">
+                      View Profile
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-green-100 bg-green-50 p-5 text-stone-700">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-900">
+                  Private Access
+                </p>
+                <p className="mt-3 leading-relaxed">
+                  This page is intentionally hidden from the main website
+                  navigation. Share the QR code or direct link only when needed.
+                </p>
+                <p className="mt-4 break-all text-sm text-stone-500">
+                  Route: <span className="font-medium">/#ceo-card</span>
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center justify-center rounded-[2rem] border border-stone-200 bg-stone-50 p-6 text-center">
+              <div className="rounded-[1.5rem] bg-white p-4 shadow-lg">
+                {qrDataUrl ? (
+                  <img
+                    src={qrDataUrl}
+                    alt={`QR code for ${CEO_DETAILS.name}`}
+                    className="h-64 w-64 max-w-full object-contain"
+                  />
+                ) : (
+                  <div className="flex h-64 w-64 items-center justify-center text-stone-400">
+                    Loading QR...
+                  </div>
+                )}
+              </div>
+              <p className="mt-5 text-sm leading-relaxed text-stone-500">
+                Scan to save Ezekiel Gyimah&apos;s contact card instantly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const AboutView = () => {
   return (
     <div className="w-full bg-white">
@@ -1099,12 +1273,30 @@ const ContactView = () => {
 };
 
 export default function App() {
-  const [currentRoute, setCurrentRoute] = useState<Route>("home");
+  const [currentRoute, setCurrentRoute] = useState<Route>(() =>
+    typeof window === "undefined" ? "home" : getRouteFromHash(),
+  );
   const [activeProductId, setActiveProductId] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentRoute]);
+
+  useEffect(() => {
+    const nextHash = currentRoute === "home" ? "" : `#${currentRoute}`;
+    if (window.location.hash !== nextHash) {
+      window.history.replaceState(null, "", `${window.location.pathname}${nextHash}`);
+    }
+  }, [currentRoute]);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentRoute(getRouteFromHash());
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   const renderView = () => {
     switch (currentRoute) {
@@ -1128,6 +1320,8 @@ export default function App() {
         return <ImpactView />;
       case "contact":
         return <ContactView />;
+      case "ceo-card":
+        return <CeoCardView />;
       default:
         return (
           <HomeView
@@ -1141,11 +1335,13 @@ export default function App() {
   return (
     <div className="flex min-h-screen flex-col bg-stone-50 selection:bg-green-200 selection:text-green-900">
       <AnnouncementBar />
-      <Navbar currentRoute={currentRoute} setRoute={setCurrentRoute} />
+      {currentRoute !== "ceo-card" && (
+        <Navbar currentRoute={currentRoute} setRoute={setCurrentRoute} />
+      )}
 
       <main className="flex-grow">{renderView()}</main>
 
-      <Footer setRoute={setCurrentRoute} />
+      {currentRoute !== "ceo-card" && <Footer setRoute={setCurrentRoute} />}
     </div>
   );
 }
